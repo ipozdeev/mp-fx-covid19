@@ -1,9 +1,9 @@
 import pandas as pd
 from joblib import Memory
 
-# from foolbox.data_utilities import parse_bloomberg_excel
+from src.utils import parse_bloomberg_excel
 
-cachedir = "/home/ipozdeev/projects/covid-fx/data"
+cachedir = "./data"
 memory = Memory(cachedir, verbose=0)
 
 

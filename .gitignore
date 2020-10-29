@@ -1,2 +1,7 @@
 .ipynb_checkpoints
 playground.py
+__pycache__
+.idea
+joblib
+data/
+!data/measures.ods
