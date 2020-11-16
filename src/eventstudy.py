@@ -118,6 +118,7 @@ class EventStudy:
             orient="columns"
         )
         dates_df.index = self.data.index
+        dates_df.columns.name = self.data.columns.name
 
         evt_dates = dates_df.where(self.events.notnull())
         periods = self.events.mask(self.events.notnull(),
@@ -160,7 +161,7 @@ class EventStudy:
         # put d_periods on the x-axis, assets/dates on the y-axis
         res = res \
             .set_index(["evt_dt", "d_periods"], append=True) \
-            .droplevel("date", axis=0) \
+            .droplevel(0, axis=0) \
             .squeeze() \
             .unstack(level=[0, 1])
 
@@ -182,7 +183,8 @@ class EventStudy:
         """
         res = df.mean(axis=1, level=0) \
             .mul(df.count(axis=1, level=0)) \
-            .div(df.count(axis=1, level=0).sum(axis=1))
+            .div(df.count(axis=1, level=0).sum(axis=1), axis=0)\
+            .sum(axis=1)
 
         return res
 
